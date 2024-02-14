@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sorteio</title>
+    <style>
+    @media (min-width: 100px)   {
+        body    {
+                    height: 90vh;
+                    background-color: #202020;
+                }
+
+        .titulo {
+                    position: absolute;
+                    left: 40%;
+                    color: #fff;
+                    font-size: 18px;
+                }
+
+        #tabela {
+                    position: absolute;
+                    width: 200px;
+                    height: 100px;
+                    left: 15%;
+                    top:34%;
+                    color: #fff;
+                    font-size: 18px;
+                }
+
+        #input-container    {
+                                position: absolute;
+                                left: 19%;
+                                top: 23%;
+                            }
+
+        #gerar  {
+                        position: absolute;
+                        top: 16%;
+                        left:2%;
+                        cursor: pointer;
+                        background-color: #DC143C;
+                        color: #fff;
+                        padding: auto;
+                        font-size: 14px;
+                        border: none
+                    }
+
+        #verifica  {
+                        position: absolute;
+                        top: 60%;
+                        left:2%;
+                        cursor: pointer;
+                        background-color: #DC143C;
+                        color: #fff;
+                        padding: auto;
+                        font-size: 14px;
+                        border: none
+                    }
+
+        #numeros-sorteados  {
+                                position: absolute;
+                                 top: 65%;
+                                left:2%;
+                                font-size: 18px;
+                                color: #fff;
+                            }
+
+        #numeros-escolhidos  {
+                                position: absolute;
+                                 top: 70%;
+                                left:2%;
+                                font-size: 18px;
+                                color: #fff;
+                            }
+
+        table {
+            border-collapse: collapse;
+            margin: 20px;
+        }
+
+        th, td {
+            border: 2px solid #DC143C;
+            padding: 8px;
+            text-align: center;
+        }
+    }
+
+    @media (min-width: 800px)   {
+        body    {
+                    height: 90vh;
+                    background-color: #202020;
+                }
+
+        .titulo {
+                    position: absolute;
+                    left: 40%;
+                    color: #fff;
+                    font-size: 30px;
+                }
+
+        #tabela {
+                    position: absolute;
+                    width: 750px;
+                    height: 150px;
+                    left: 25%;
+                    top:34%;
+                    color: #fff;
+                    font-size: 40px;
+                }
+
+        #input-container    {
+                                position: absolute;
+                                left: 15%;
+                                top: 29%;
+                            }
+
+        #gerar  {
+                        position: absolute;
+                        top: 19%;
+                        left:2%;
+                        cursor: pointer;
+                        background-color: #DC143C;
+                        color: #fff;
+                        padding: auto;
+                        font-size: 20px;
+                        border: none
+                    }
+
+        #verifica  {
+                        position: absolute;
+                        top: 75%;
+                        left:2%;
+                        cursor: pointer;
+                        background-color: #DC143C;
+                        color: #fff;
+                        padding: auto;
+                        font-size: 20px;
+                        border: none
+                    }
+
+        #numeros-sorteados  {
+                                position: absolute;
+                                 top: 80%;
+                                left:2%;
+                                font-size: 28px;
+                                color: #fff;
+                            }
+
+        #numeros-escolhidos  {
+                                position: absolute;
+                                 top: 85%;
+                                left:2%;
+                                font-size: 28px;
+                                color: #fff;
+                            }
+
+        table {
+            border-collapse: collapse;
+            margin: 20px;
+        }
+
+        th, td {
+            border: 2px solid #DC143C;
+            padding: 8px;
+            text-align: center;
+        }
+    }
+    </style>
+</head>
+<body>
+    <div class="titulo">
+        <h1>SORTEIO</h1>
+    </div>
+    <button id="gerar" onclick="gerarNumeros()">Gerar Números</button>
+    <div id="input-container"></div>
+    <table id="tabela"></table>
+    <button id="verifica" onclick="verificarAcertos()">Verificar Acertos</button>
+    <div id="numeros-sorteados"></div>
+    <div id="numeros-escolhidos"></div>
+
+    <script>
+        const numeros = [];
+        const GerarTabela = [];
+        const NumAleatorio = 30;
+        const Sorteio = [];
+        const SortAle = 6;
+        const fe = [];
+        const limite = 6;
+
+        for (let i = 0; i <= 99; i++) {
+            numeros.push(i);
+        }
+
+        function gerarNumeros() {
+            // Limpar apenas os valores da tabela
+            const tabela = document.getElementById('tabela');
+            tabela.innerHTML = '';
+
+            // Gerar novos números
+            GerarTabela.length = 0;  // Limpar a array sem remover a referência
+            numerosBackup = [...numeros];  // Criar uma cópia de backup
+
+            while (GerarTabela.length < NumAleatorio && numerosBackup.length > 0) {
+                const PushAleatorio = Math.floor(Math.random() * numerosBackup.length);
+
+                GerarTabela.push(numerosBackup[PushAleatorio]);
+                numerosBackup.splice(PushAleatorio, 1);
+            }
+
+            const corpoTabela = tabela.createTBody();
+
+            for (let i = 0; i < GerarTabela.length; i++) {
+                if (i % 10 === 0) {
+                    var linha = corpoTabela.insertRow();
+                }
+                const td = linha.insertCell();
+                td.textContent = GerarTabela[i];
+            }
+
+            const inputContainer = document.getElementById('input-container');
+            inputContainer.innerHTML = '';
+
+            for (let i = 0; i < limite; i++) {
+                const input = document.createElement('input');
+                input.type = 'number';
+                input.placeholder = 'Digite um número';
+                inputContainer.appendChild(input);
+            }
+
+            Sorteio.length = 0;  // Limpar a array de sorteio sem remover a referência
+
+            while (Sorteio.length < SortAle && GerarTabela.length > 0) {
+                const PushAleatorio = Math.floor(Math.random() * GerarTabela.length);
+
+                Sorteio.push(GerarTabela[PushAleatorio]);
+                GerarTabela.splice(PushAleatorio, 1);
+            }
+        }
+
+        // Adicione uma variável para armazenar uma cópia de backup da array 'numeros'
+        let numerosBackup = [...numeros];
+
+
+        function verificarAcertos() {
+            
+            fe.length = 0;
+            const inputFields = document.querySelectorAll('#input-container input');
+            inputFields.forEach(input => {
+                if (!isNaN(input.value) && input.value !== '') {
+                    fe.push(parseInt(input.value));
+                }
+            });
+
+            const acertos = Sorteio.filter(numero => fe.indexOf(numero) !== -1);
+            if (acertos.length === SortAle) 
+            {
+                alert("Parabéns! Você acertou todos os números sorteados!");
+            } 
+            else 
+            {
+                acertos.sort((a, b) => a - b);
+                alert(`Você acertou ${acertos.length} números: ${acertos.join(', ')}`);
+            }
+
+            Sorteio.sort((a, b) => a - b);
+            const numerosSorteadosDiv = document.getElementById('numeros-sorteados');
+            numerosSorteadosDiv.textContent = `Números Sorteados: ${Sorteio.join(', ')}`;
+
+            fe.sort((a, b) => a - b);
+            const numerosEscolhidosDiv = document.getElementById('numeros-escolhidos');
+            numerosEscolhidosDiv.textContent = `Números Escolhidos: ${fe.join(', ')}`;
+        }
+    </script>
+</body>
+</html>
