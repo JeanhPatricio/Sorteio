@@ -12,8 +12,9 @@
                 }
 
         .titulo {
-                    position: absolute;
-                    left: 40%;
+                    position: fixed;
+                    left: 50%; /* Coloca o elemento na metade da largura da tela */
+                    transform: translateX(-50%); /* Move o título para a esquerda em 50% da sua própria largura */
                     color: #fff;
                     font-size: 18px;
                 }
@@ -22,7 +23,7 @@
                     position: absolute;
                     width: 200px;
                     height: 100px;
-                    left: 15%;
+                    left: 30px;
                     top:34%;
                     color: #fff;
                     font-size: 18px;
@@ -30,7 +31,7 @@
 
         #input-container    {
                                 position: absolute;
-                                left: 19%;
+                                left: 55px;
                                 top: 23%;
                             }
 
@@ -75,15 +76,15 @@
                             }
 
         table {
-            border-collapse: collapse;
-            margin: 20px;
+                border-collapse: collapse;
+                margin: 20px;
         }
 
         th, td {
-            border: 2px solid #DC143C;
-            padding: 8px;
-            text-align: center;
-        }
+                    border: 2px solid #DC143C;
+                    padding: 8px;
+                    text-align: center;
+                }
     }
 
     @media (min-width: 800px)   {
@@ -93,8 +94,9 @@
                 }
 
         .titulo {
-                    position: absolute;
-                    left: 40%;
+                    position: fixed;
+                    left: 50%; /* Coloca o elemento na metade da largura da tela */
+                    transform: translateX(-50%); /* Move o título para a esquerda em 50% da sua própria largura */
                     color: #fff;
                     font-size: 30px;
                 }
@@ -103,7 +105,7 @@
                     position: absolute;
                     width: 750px;
                     height: 150px;
-                    left: 25%;
+                    left: 180px;
                     top:34%;
                     color: #fff;
                     font-size: 40px;
@@ -111,7 +113,7 @@
 
         #input-container    {
                                 position: absolute;
-                                left: 15%;
+                                left: 50px;
                                 top: 29%;
                             }
 
